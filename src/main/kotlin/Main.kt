@@ -1,8 +1,22 @@
 
 import org.ejml.simple.SimpleMatrix
 
+/*
+ Idea for test:
+ make the network say if number is even or uneven
+ */
 
 fun main() {
+
+    val neuralNetwork = NeuralNetwork(
+        listOf(3, 5, 4, 7),
+        ReLUFunction()
+    )
+
+    println(neuralNetwork.process(listOf(3.0, 2.0, 1.0)))
+
+
+
     /*val firstMatrix = SimpleMatrix(
         arrayOf(
             doubleArrayOf(1.0, 5.0),
@@ -25,4 +39,5 @@ fun main() {
     val actual = firstMatrix.mult(secondMatrix)
 
     actual.print()*/
+
 }
