@@ -1,4 +1,3 @@
-
 import org.ejml.simple.SimpleMatrix
 
 /*
@@ -8,12 +7,14 @@ import org.ejml.simple.SimpleMatrix
 
 fun main() {
 
-    val neuralNetwork = NeuralNetwork(
+
+
+    /*val neuralNetwork = NeuralNetwork(
         listOf(3, 5, 4, 7),
         ReLUFunction()
     )
 
-    println(neuralNetwork.process(listOf(3.0, 2.0, 1.0)))
+    println(neuralNetwork.process(listOf(3.0, 2.0, 1.0)))*/
 
 
 
