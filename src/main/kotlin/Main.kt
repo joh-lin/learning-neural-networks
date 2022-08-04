@@ -1,4 +1,10 @@
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.encodeToJsonElement
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
 import org.ejml.simple.SimpleMatrix
+import kotlin.random.Random
 
 /*
  Idea for test:
@@ -8,6 +14,18 @@ import org.ejml.simple.SimpleMatrix
 fun main() {
 
 
+    //val test = mutableListOf("First Entry", "second", "3", "quadro", "V")
+    val test = NeuralNetwork(listOf(3,3,3), ActivationFunction(ActivationFunction.Type.ReLU))
+    println(test)
+
+    val encoded = Json.encodeToJsonElement(test).toString()
+    println(
+        encoded
+    )
+
+    println(
+        Json.decodeFromString<NeuralNetwork>(encoded)
+    )
 
     /*val neuralNetwork = NeuralNetwork(
         listOf(3, 5, 4, 7),
@@ -41,4 +59,20 @@ fun main() {
 
     actual.print()*/
 
+}
+
+fun SimpleMatrix.filLRandomDouble(min: Double, max: Double) {
+    for (row in 0 until this.numRows()) {
+        for (col in 0 until this.numCols()) {
+            this.set(row, col, Random.nextDouble(min, max))
+        }
+    }
+}
+
+fun SimpleMatrix.filLRandomInt(min: Int, max: Int) {
+    for (row in 0 until this.numRows()) {
+        for (col in 0 until this.numCols()) {
+            this.set(row, col, Random.nextInt(min, max).toDouble())
+        }
+    }
 }

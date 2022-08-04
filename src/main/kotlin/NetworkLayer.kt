@@ -1,20 +1,15 @@
+import kotlinx.serialization.Serializable
 import org.ejml.simple.SimpleMatrix
 import java.lang.RuntimeException
-import kotlin.random.Random
 
-class NetworkLayer(val inputCount: Int, val neuronCount: Int, val neuralNetwork: NeuralNetwork) {
-    private val weights = SimpleMatrix(neuronCount, inputCount+1)
+@Serializable
+class NetworkLayer(
+    val inputCount: Int,
+    val neuronCount: Int,
+    @Serializable(with = SimpleMatrixSerializer::class)
+    val weights: SimpleMatrix = SimpleMatrix(neuronCount, inputCount+1)) {
 
-    /* Random Weights
-    init {
-        for (row in 0 until weights.numRows()) {
-            for (col in 0 until weights.numCols()) {
-                weights.set(row, col, Random.nextDouble(0.0, 2.0))
-            }
-        }
-    }*/
-
-    fun process(input: SimpleMatrix): SimpleMatrix {
+    fun process(input: SimpleMatrix, activationFunction: ActivationFunction): SimpleMatrix {
         if (input.numRows() != inputCount)
             throw RuntimeException(
                 "Invalid number of inputs ( received ${input.numRows()} | expected $inputCount )")
@@ -23,7 +18,7 @@ class NetworkLayer(val inputCount: Int, val neuronCount: Int, val neuralNetwork:
         val multResult = weights.mult(input)
         for (i in 0 until multResult.numRows()) {
             multResult.set(i, 0,
-                neuralNetwork.activationFunction.process(multResult.get(i, 0))
+                activationFunction.process(multResult.get(i, 0))
             )
         }
         return multResult
