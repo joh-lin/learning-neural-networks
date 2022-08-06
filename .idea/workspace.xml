@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce63b133-9e9d-4f05-8286-a67dfbbcd91f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/SimpleMatrixSerializer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/ActivationFunction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ActivationFunction.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/NetworkLayer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/NetworkLayer.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/NeuralNetwork.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/NeuralNetwork.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ReLUFunction.kt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

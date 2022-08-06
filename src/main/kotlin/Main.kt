@@ -1,64 +1,76 @@
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.encodeToJsonElement
-import kotlinx.serialization.modules.SerializersModule
-import kotlinx.serialization.modules.polymorphic
 import org.ejml.simple.SimpleMatrix
 import kotlin.random.Random
+import kotlin.system.measureTimeMillis
 
-/*
- Idea for test:
- make the network say if number is even or uneven
+/* TODO:
+    Types:
+    - Convolutional Network
+    - Recurrent Network
+    - LSTM (Long short-term memory)
+    - NEAT (Neuroevolution of augmenting topologies)
+    - Neuroevolution
+    Learning:
+    - Reinforcement Learning
+    - learning beyond training data
+    Other:
+    - Weight Initialization ☑
+    - Gradient Clipping
+    - Weight Regularization
+    - Weight Penalty
+    - Cross-Entropy cost function
  */
 
 fun main() {
-
-
-    //val test = mutableListOf("First Entry", "second", "3", "quadro", "V")
-    val test = NeuralNetwork(listOf(3,3,3), ActivationFunction(ActivationFunction.Type.ReLU))
-    println(test)
-
-    val encoded = Json.encodeToJsonElement(test).toString()
-    println(
-        encoded
+    val neuralNetwork = NeuralNetwork(
+        listOf(5, 5, 1), ActivationFunction(ActivationFunction.Type.ReLU)
     )
 
-    println(
-        Json.decodeFromString<NeuralNetwork>(encoded)
+    for (e in 0..1_000_000) {
+        val input = mutableListOf<Double>()
+        var avg = 0.0
+        for (i in 0..4) {
+            val v = Random.nextDouble()
+            input.add(v)
+            avg += v / 5
+        }
+        val result = neuralNetwork.learn(input, listOf(avg), 0.1)
+        if (e > 900_000)println("i: $input = $avg / ${result.finalOutput.get(0,0)}   ->  ${result.totalError}")
+    }
+}
+
+fun test1() {
+    val layers = mutableListOf<NetworkLayer>(
+        // layer 1
+        NetworkLayer(2, 2, SimpleMatrix(arrayOf(
+            doubleArrayOf(.29, .46, .86),
+            doubleArrayOf(.08, .98, .69)))),
+
+        // layer 2
+        NetworkLayer(2, 2, SimpleMatrix(arrayOf(
+            doubleArrayOf(.50, .82, .76),
+            doubleArrayOf(.94, .20, .26))))
+    )
+    val neuralNetwork = NeuralNetwork(
+        listOf(2, 2, 2),ActivationFunction(ActivationFunction.Type.ReLU)
     )
 
-    /*val neuralNetwork = NeuralNetwork(
-        listOf(3, 5, 4, 7),
-        ReLUFunction()
-    )
+    val input = listOf( .28 , .57 )
 
-    println(neuralNetwork.process(listOf(3.0, 2.0, 1.0)))*/
+    val target = listOf( .75 , .25 )
 
+    val output = neuralNetwork.propagate(input)
 
+    println("\nBACKPROPAGATION\n")
 
-    /*val firstMatrix = SimpleMatrix(
-        arrayOf(
-            doubleArrayOf(1.0, 5.0),
-            doubleArrayOf(2.0, 3.0),
-            doubleArrayOf(1.0, 7.0)))
+    val training = neuralNetwork.learn(input, target, 1.0)
 
-    val secondMatrix = SimpleMatrix(
-        arrayOf(
-            doubleArrayOf(1.0, 2.0, 3.0, 7.0),
-            doubleArrayOf(5.0, 2.0, 8.0, 1.0)))
-
-    val expected = SimpleMatrix(
-        arrayOf(
-            doubleArrayOf(26.0, 12.0, 43.0, 12.0),
-            doubleArrayOf(17.0, 10.0, 30.0, 17.0),
-            doubleArrayOf(36.0, 16.0, 59.0, 14.0)
-        )
-    )
-
-    val actual = firstMatrix.mult(secondMatrix)
-
-    actual.print()*/
-
+    println("""
+TotalError: ${training.totalError}
+Error: ${training.error}
+    """.trimIndent())
 }
 
 fun SimpleMatrix.filLRandomDouble(min: Double, max: Double) {
