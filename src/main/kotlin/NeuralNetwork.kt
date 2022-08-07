@@ -17,7 +17,7 @@ class NeuralNetwork(
     val outputCount: Int
 
     init {
-        if (dimensions.size <= 2) {
+        if (dimensions.size <= 1) {
             throw RuntimeException("Dimensions array for neural network needs at least two layers (input and output).")
         }
 
@@ -93,43 +93,38 @@ class NeuralNetwork(
 
         val layer = layers[layerIndex]
         // calculate output of this layer
+        // TODO copy might not be necessary here
         val result: NetworkLayer.ProcessResult = layer.process(input.copy(), activationFunction)
         // Recursive call to this function
         val nextLayer = backpropagation(result.activations, target, learningRate, layerIndex+1)
 
-
         // calculate zError from aError and activationFunction derivative
         val aError = nextLayer.error
         val zError = SimpleMatrix(aError.numRows(), 1)
-        for (row in 0 until zError.numRows()) {
+        for (i in 0 until zError.numElements) {
             // Error = f'(z) * e
-            zError[row] = activationFunction.derivative(result.zValues[row]) * aError[row]
+            zError.set(i,activationFunction.derivative(result.zValues.get(i)) * aError.get(i))
         }
 
-        // create copy of weights before modifying
-        val tempWeights = SimpleMatrix(layer.weights.numRows(), layer.weights.numCols()-1)
-        for (row in 0 until tempWeights.numRows()) {
-            for (col in 0 until tempWeights.numCols()) {
-                tempWeights.set(row, col, layer.weights.get(row, col))
-            }
-        }
+        // calculate error for neurons of previous layer
+        val prevLayerAError = layer.weights.transpose().mult(zError)
 
         // apply calculated gradient to each weight of this layer
         for (row in 0 until layer.weights.numRows()) {
             for (col in 0 until layer.weights.numCols()) {
                 val weight = layer.weights.get(row, col)
-                val error = (
-                        if (col == layer.weights.numCols()-1) 1.0
-                        else input[col]) *
-                        (zError.get(row, 0))
+                val error = input[col] * zError.get(row)
                 layer.weights.set(row, col,
                     weight - (learningRate * error)
                 )
             }
         }
 
-        // calculate error for neurons of previous layer
-        val prevLayerAError = tempWeights.transpose().mult(zError)
+        // apply gradient to bias
+        for (i in 0 until layer.bias.numElements) {
+            layer.bias.set(i, layer.bias.get(i) - zError.get(i))
+        }
+
 
         // return to previous layer
         return LearnResult(result.activations, prevLayerAError, nextLayer.finalOutput, nextLayer.totalError)

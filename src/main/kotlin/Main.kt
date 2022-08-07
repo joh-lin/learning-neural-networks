@@ -16,6 +16,7 @@ import kotlin.system.measureTimeMillis
     - Reinforcement Learning
     - learning beyond training data
     Other:
+    - Softmax
     - Weight Initialization ☑
     - Gradient Clipping
     - Weight Regularization
@@ -24,37 +25,52 @@ import kotlin.system.measureTimeMillis
  */
 
 fun main() {
+    test2()
+}
+fun test2() {
     val neuralNetwork = NeuralNetwork(
-        listOf(5, 5, 1), ActivationFunction(ActivationFunction.Type.ReLU)
+        listOf(10, 10000, 10000, 1), ActivationFunction(ActivationFunction.Type.ReLU)
     )
 
-    for (e in 0..1_000_000) {
-        val input = mutableListOf<Double>()
-        var avg = 0.0
-        for (i in 0..4) {
-            val v = Random.nextDouble()
-            input.add(v)
-            avg += v / 5
+    println(neuralNetwork.layers)
+
+    val input = NeuralNetwork.listToColumnVector(listOf(0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0))
+    val output = NeuralNetwork.listToColumnVector(listOf(0.5, 1.0, 0.0, 0.0, 0.0, 0.5, 1.0, 0.0, 0.0, 0.0))
+
+    measureTimeMillis {
+        for (e in 0..1_000) {
+            neuralNetwork.propagate(input)
         }
-        val result = neuralNetwork.learn(input, listOf(avg), 0.1)
-        if (e > 900_000)println("i: $input = $avg / ${result.finalOutput.get(0,0)}   ->  ${result.totalError}")
-    }
+    }.also { println(it) }
+
+    println("""
+        Reshape: ${Benchmark.reshapeTime}
+        Mult: ${Benchmark.multTime}
+        Activation: ${Benchmark.activationFunctionTime}
+    """.trimIndent())
+
+    println(neuralNetwork.propagate(input))
 }
 
 fun test1() {
     val layers = mutableListOf<NetworkLayer>(
         // layer 1
         NetworkLayer(2, 2, SimpleMatrix(arrayOf(
-            doubleArrayOf(.29, .46, .86),
-            doubleArrayOf(.08, .98, .69)))),
+            doubleArrayOf(.29, .46),
+            doubleArrayOf(.08, .98))),SimpleMatrix(arrayOf(
+            doubleArrayOf(.86),
+            doubleArrayOf(.69)))
+        ),
 
         // layer 2
         NetworkLayer(2, 2, SimpleMatrix(arrayOf(
-            doubleArrayOf(.50, .82, .76),
-            doubleArrayOf(.94, .20, .26))))
+            doubleArrayOf(.50, .82),
+            doubleArrayOf(.94, .20))),SimpleMatrix(arrayOf(
+            doubleArrayOf(.76),
+            doubleArrayOf(.26))))
     )
     val neuralNetwork = NeuralNetwork(
-        listOf(2, 2, 2),ActivationFunction(ActivationFunction.Type.ReLU)
+        listOf(2, 2, 2),ActivationFunction(ActivationFunction.Type.ReLU), layers
     )
 
     val input = listOf( .28 , .57 )
@@ -62,6 +78,8 @@ fun test1() {
     val target = listOf( .75 , .25 )
 
     val output = neuralNetwork.propagate(input)
+
+    println(output)
 
     println("\nBACKPROPAGATION\n")
 
