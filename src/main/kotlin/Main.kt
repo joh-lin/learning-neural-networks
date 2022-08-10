@@ -1,6 +1,7 @@
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+import com.johannes.convneuralnetwork.*
+import com.johannes.neuralnetwork.ActivationFunction
+import com.johannes.neuralnetwork.NetworkLayer
+import com.johannes.neuralnetwork.NeuralNetwork
 import org.ejml.simple.SimpleMatrix
 import kotlin.random.Random
 import kotlin.system.measureTimeMillis
@@ -17,39 +18,31 @@ import kotlin.system.measureTimeMillis
     - learning beyond training data
     Other:
     - Softmax
+    - Cross-Entropy cost function
     - Weight Initialization ☑
     - Gradient Clipping
     - Weight Regularization
     - Weight Penalty
-    - Cross-Entropy cost function
  */
 
 fun main() {
     test2()
 }
 fun test2() {
-    val neuralNetwork = NeuralNetwork(
-        listOf(10, 10000, 10000, 1), ActivationFunction(ActivationFunction.Type.ReLU)
+    val convnet = ConvolutionLayer(
+        Shape(5, 5, 1),
+        1,3,false
     )
 
-    println(neuralNetwork.layers)
+    val res = convnet.propagate(arrayOf(arrayOf(
+        doubleArrayOf(0.0, 0.0, 0.0, 0.0, 0.0),
+        doubleArrayOf(0.0, 0.0, 0.0, 0.0, 0.0),
+        doubleArrayOf(0.0, 0.0, 5.0, 0.0, 0.0),
+        doubleArrayOf(0.0, 0.0, 0.0, 0.0, 0.0),
+        doubleArrayOf(0.0, 0.0, 0.0, 0.0, 0.0)
+    )))
 
-    val input = NeuralNetwork.listToColumnVector(listOf(0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0))
-    val output = NeuralNetwork.listToColumnVector(listOf(0.5, 1.0, 0.0, 0.0, 0.0, 0.5, 1.0, 0.0, 0.0, 0.0))
-
-    measureTimeMillis {
-        for (e in 0..1_000) {
-            neuralNetwork.propagate(input)
-        }
-    }.also { println(it) }
-
-    println("""
-        Reshape: ${Benchmark.reshapeTime}
-        Mult: ${Benchmark.multTime}
-        Activation: ${Benchmark.activationFunctionTime}
-    """.trimIndent())
-
-    println(neuralNetwork.propagate(input))
+    res.first().forEach { println(it.toList()) }
 }
 
 fun test1() {
@@ -70,7 +63,7 @@ fun test1() {
             doubleArrayOf(.26))))
     )
     val neuralNetwork = NeuralNetwork(
-        listOf(2, 2, 2),ActivationFunction(ActivationFunction.Type.ReLU), layers
+        listOf(2, 2, 2), ActivationFunction(ActivationFunction.Type.ReLU), layers
     )
 
     val input = listOf( .28 , .57 )

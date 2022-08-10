@@ -1,4 +1,7 @@
+package com.johannes.neuralnetwork
+
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 import org.ejml.simple.SimpleMatrix
 import kotlin.math.pow
 
@@ -90,11 +93,9 @@ class NeuralNetwork(
             return LearnResult(input,error,input,totalError)
         }
 
-
         val layer = layers[layerIndex]
         // calculate output of this layer
-        // TODO copy might not be necessary here
-        val result: NetworkLayer.ProcessResult = layer.process(input.copy(), activationFunction)
+        val result: NetworkLayer.ProcessResult = layer.process(input, activationFunction)
         // Recursive call to this function
         val nextLayer = backpropagation(result.activations, target, learningRate, layerIndex+1)
 
@@ -122,7 +123,7 @@ class NeuralNetwork(
 
         // apply gradient to bias
         for (i in 0 until layer.bias.numElements) {
-            layer.bias.set(i, layer.bias.get(i) - zError.get(i))
+            layer.bias.set(i, layer.bias.get(i) - (learningRate * zError.get(i)))
         }
 
 

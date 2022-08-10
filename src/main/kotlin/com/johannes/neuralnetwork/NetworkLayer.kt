@@ -1,7 +1,8 @@
+package com.johannes.neuralnetwork
+
+import com.johannes.util.SimpleMatrixSerializer
 import kotlinx.serialization.Serializable
 import org.ejml.simple.SimpleMatrix
-import java.lang.RuntimeException
-import kotlin.time.measureTime
 
 @Serializable
 class NetworkLayer(
@@ -17,7 +18,6 @@ class NetworkLayer(
      * @return Output values.
      */
     fun process(input: SimpleMatrix, activationFunction: ActivationFunction): ProcessResult {
-
         // calculate zValues with matrix multiplication
         val zValues = weights.mult(input).plus(bias)
 
@@ -46,4 +46,8 @@ class NetworkLayer(
         val activations: SimpleMatrix,
         val zValues: SimpleMatrix,
     )
+
+    override fun toString(): String {
+        return "NetworkLayer(inputCount = $inputCount, neuronCount = $neuronCount)"
+    }
 }

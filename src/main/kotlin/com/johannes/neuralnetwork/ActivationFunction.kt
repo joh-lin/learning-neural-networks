@@ -1,3 +1,5 @@
+package com.johannes.neuralnetwork
+
 import kotlinx.serialization.Serializable
 import kotlin.math.max
 import kotlin.math.sqrt
