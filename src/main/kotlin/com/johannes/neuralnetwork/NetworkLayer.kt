@@ -1,5 +1,6 @@
 package com.johannes.neuralnetwork
 
+import com.johannes.common.ActivationFunction
 import com.johannes.util.SimpleMatrixSerializer
 import kotlinx.serialization.Serializable
 import org.ejml.simple.SimpleMatrix

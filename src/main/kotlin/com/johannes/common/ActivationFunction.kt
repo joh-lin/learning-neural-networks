@@ -1,4 +1,4 @@
-package com.johannes.neuralnetwork
+package com.johannes.common
 
 import kotlinx.serialization.Serializable
 import kotlin.math.max

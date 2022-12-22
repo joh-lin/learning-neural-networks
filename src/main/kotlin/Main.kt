@@ -1,10 +1,9 @@
 import com.johannes.convneuralnetwork.*
-import com.johannes.neuralnetwork.ActivationFunction
+import com.johannes.common.ActivationFunction
 import com.johannes.neuralnetwork.NetworkLayer
 import com.johannes.neuralnetwork.NeuralNetwork
 import org.ejml.simple.SimpleMatrix
 import kotlin.random.Random
-import kotlin.system.measureTimeMillis
 
 /* TODO:
     Types:

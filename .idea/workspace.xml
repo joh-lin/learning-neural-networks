@@ -5,24 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce63b133-9e9d-4f05-8286-a67dfbbcd91f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/johannes/convneuralnetwork/ActivationLayer.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/johannes/convneuralnetwork/ConvNeuralNetwork.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/johannes/convneuralnetwork/ConvolutionLayer.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/johannes/convneuralnetwork/MaxPoolingLayer.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/johannes/convneuralnetwork/NetworkLayer.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/johannes/convneuralnetwork/Shape.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/Burger.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/Food.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/MainTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/Pizza.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/Salad.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/johannes/recurrentneuralnetwork/RecurrentNeuralNetwork.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ActivationFunction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/johannes/neuralnetwork/ActivationFunction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Benchmark.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/NetworkLayer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/johannes/neuralnetwork/NetworkLayer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/NeuralNetwork.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/johannes/neuralnetwork/NeuralNetwork.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/SimpleMatrixSerializer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/johannes/util/SimpleMatrixSerializer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/johannes/neuralnetwork/ActivationFunction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/johannes/common/ActivationFunction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/johannes/neuralnetwork/NetworkLayer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/johannes/neuralnetwork/NetworkLayer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/johannes/neuralnetwork/NeuralNetwork.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/johannes/neuralnetwork/NeuralNetwork.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,18 +48,19 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.johannes.common" />
       <recent name="com.johannes.util" />
       <recent name="com.johannes.neuralnetwork" />
     </key>
   </component>
-  <component name="RunManager" selected="Kotlin.MainKt">
+  <component name="RunManager" selected="Kotlin.MainTestKt">
     <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="learning-neural-networks.main" />
@@ -86,8 +77,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Kotlin.MainKt" />
         <item itemvalue="Kotlin.MainTestKt" />
+        <item itemvalue="Kotlin.MainKt" />
       </list>
     </recent_temporary>
   </component>
